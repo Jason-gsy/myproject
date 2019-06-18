@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>create a map</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <!-- Dojo中包括Claro、Tundra、Soria、Nihilo四种预先定义的主题-->
+    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/dojo/digit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">
+    <style>
+        html,
+        body,
+        #mapDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <script src="http://js.arcgis.com/3.7/"></script>
+    <script>
+        var map;
+        //使用require函数完成对地图资源的引用，dojo/domReady!插件保证所有的html元素都被加载。
+        require(["esri/map",
+            "esri/layers/ArcGISDynamicMapServiceLayer",
+            "dojo/domReady!",
+            "esri/geometry"
+        ], function(Map, ArcGISDynamicMapServiceLayer, SimpleMarkerSymbol, Graphic, Colorm, Scalebar) {
+            //Map的构造函数有两个参数，包括承载地图的容器和各种地图选项（json格式）
+            map = new Map("mapDiv", {
+                basemap: "topo",
+                center: [-122.45, 37.75],
+                zoom: 15,
+                sliderStyle: "small"
+            });
+            // var basemap = new ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer");
+            // map.addLayer(basemap);
+            //http://localhost:6080/arcgis/rest/services/MyMapService/MapServer
+            //http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer
+            //var operationalLayer = new ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer",{"opacity":0.5});
+            //map.addLayer(operationalLayer);
+
+            // //创建几何图形
+            // var point = new Pointer();
+            // //图形符号化
+            // var markerSymbol = new SimpleMarkerSymbol();
+            // markerSymbol.setStyle(SimpleMarkerSymbol.STYLE_CIRCLE);
+            // markerSymbol.setSize(20);
+            // markerSymbol.setColor(new Color([255,255,0]));
+            // //图形分配属性
+            // var pointAttributes = {addres:"101 Main Street",city:"Portland",state:"Oregon"};
+            // //信息模板
+            // var pointInfoTemplate = new InfoTemplate("Geocoding Results");
+            // //创建图形
+            // var pointGraphic = new Graphic(point,markerSymbol,pointAttributes).setInfoTemplate(pointInfoTemplate);
+            // //添加图形到图形层
+            // map.graphics.add(pointGraphic);
+
+            var scalebar = new esri.dijit.Scalebar({
+                map: map,
+                attachTo: 'bottom-left',
+                scalebarUnit: 'english'
+            });
+
+
+        });
+    </script>
+</head>
+
+<body class="claro">
+    <div id="mapDiv"></div>
+</body>
+
+</html>

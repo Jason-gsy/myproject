@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>地图小组件</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <!-- Dojo中包括Claro、Tundra、Soria、Nihilo四种预先定义的主题-->
+    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/dojo/digit/themes/claro/claro.css">
+
+    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">
+    <style>
+        html,
+        body,
+        #mapDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <script src="http://js.arcgis.com/3.7/"></script>
+    <script>
+        var map;
+        //使用require函数完成对地图资源的引用，dojo/domReady!插件保证所有的html元素都被加载。
+        require(["esri/map",
+            "esri/layers/ArcGISDynamicMapServiceLayer",
+            "dojo/domReady!",
+            "esri/dijit/Scalebar"
+        ], function(Map, ArcGISDynamicMapServiceLayer, Scalebar) {
+            //Map的构造函数有两个参数，包括承载地图的容器和各种地图选项（json格式）
+            map = new Map("mapDiv", {
+                zoom: 15,
+                sliderStyle: "small"
+            });
+            var operationalLayer = new ArcGISDynamicMapServiceLayer("http://localhost:6080/arcgis/rest/services/勃利县/MapServer", {
+                "opacity": 0.5
+            });
+            map.addLayer(operationalLayer);
+
+
+            var scalebar = new Scalebar({
+                map: map, //表示标识的地图
+                attachTo: "bottom-left", //比例尺在地图的位置 ，可以是top-right,bottom-right,top-center,bottom-center,bottom-left,top-left。默认是bottom-left。
+                scalebarUnit: "dual", //比例尺单位。可以是english或metric或dual（同时显示english和metric）。默认是english（英尺）
+            });
+
+
+
+        });
+    </script>
+</head>
+
+<body class="claro">
+    <div id="mapDiv"></div>
+</body>
+
+</html>
