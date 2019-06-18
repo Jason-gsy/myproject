@@ -1,0 +1,25 @@
+<!--pages/orderTime/index.wxml-->
+<view class='containt'>
+  <scroll-view class="scroll-view_H" scroll-x>
+    <view class='list' style='width:{{ width }}rpx'>
+      <view bindtap="select" wx:for="{{ calendar }}" wx:for-item="item" wx:for-index="index" data-index="{{ index }}" class='listItem {{index==currentIndex1? "current":""}}' wx:key='' data-date="{{ item.date}}">
+        <text class='name'>{{ item.week }}</text>
+        <text class='date'>{{ item.date }}</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view class='time'>
+    <view wx:for="{{ timeArr }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" data-time="{{ timeItem.time}}" bindtap='selectTime' class='listItem {{ currentTime1==timeIndex? "current":"" }}' wx:key=''>
+      <text>{{ timeItem.time }}</text>
+      <text>{{ timeItem.status }}</text>
+    </view>
+    <text>预约孩子姓名</text>
+<input   type="string" placeholder="姓名" bindinput="setcname"/>
+  </view>
+  <view class='operate'>
+  
+   <button  bindtap='insert'>保存</button>
+  </view>
+  <input   type="string" placeholder="预约人姓名" bindinput="setname"/>
+<input   type="number" placeholder="预约人电话" bindinput="setphonenum"/>
+</view>

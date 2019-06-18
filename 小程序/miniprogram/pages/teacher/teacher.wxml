@@ -1,0 +1,22 @@
+<view hover-class="container">
+   <!-- 老师 -->
+  
+<view class="uploader">
+   <view>
+       <cover-view class="uploader-image">
+           <cover-image src="/pages/teacher/QQ图片20190429103700.jpg"></cover-image>
+       </cover-view>
+      
+   </view>
+      
+    <view>
+      <button class="uploader-text" bindtap="copyTBL">点击复制老师电话</button>
+    </view>
+    <view>
+      <button class="uploader-text" bindtap="copyTBL1">点击复制老师微信</button>
+    </view>
+  </view>
+ 
+
+     
+</view>
